@@ -182,8 +182,13 @@ function removeFirstOccurrences(str, value) {
  *   removeLastOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeLastOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeLastOccurrences(str, value) {
+  if (str.lastIndexOf(value) !== -1) {
+    const firstPart = str.slice(0, str.lastIndexOf(value));
+    const secondPart = str.slice(str.lastIndexOf(value) + value.length);
+    return firstPart.concat('', secondPart);
+  }
+  return str;
 }
 
 /**
@@ -198,8 +203,15 @@ function removeLastOccurrences(/* str, value */) {
  *   sumOfCodes('') => 0
  *   sumOfCodes() => 0
  */
-function sumOfCodes(/* str */) {
-  throw new Error('Not implemented');
+function sumOfCodes(str) {
+  if (typeof str !== 'string') {
+    return 0;
+  }
+  let sumCode = 0;
+  for (let i = 0; i < str.length; i += 1) {
+    sumCode += str.charCodeAt(i);
+  }
+  return sumCode;
 }
 
 /**
@@ -213,8 +225,8 @@ function sumOfCodes(/* str */) {
  *   startsWith('Hello World', 'World') => false
  *   startsWith('Hello World', 'Hello') => true
  */
-function startsWith(/* str, substr */) {
-  throw new Error('Not implemented');
+function startsWith(str, substr) {
+  return str.startsWith(substr);
 }
 
 /**
@@ -228,8 +240,8 @@ function startsWith(/* str, substr */) {
  *   endsWith('Hello World', 'World') => true
  *   endsWith('Hello World', 'Hello') => false
  */
-function endsWith(/* str, substr */) {
-  throw new Error('Not implemented');
+function endsWith(str, substr) {
+  return str.endsWith(substr);
 }
 
 /**
@@ -245,8 +257,17 @@ function endsWith(/* str, substr */) {
  *   formatTime(0, 45) => "00:45"
  *   formatTime(0, 0) => "00:00"
  */
-function formatTime(/* minutes, seconds */) {
-  throw new Error('Not implemented');
+function formatTime(minutes, seconds) {
+  let min = String(minutes);
+  let sec = String(seconds);
+  if (min < 10) {
+    min = min.padStart(2, '0');
+  }
+  min = min.padEnd(3, ':');
+  if (sec < 10) {
+    sec = sec.padStart(2, '0');
+  }
+  return min.concat('', sec);
 }
 
 /**
@@ -259,8 +280,12 @@ function formatTime(/* minutes, seconds */) {
  *   reverseString('abcdef') => 'fedcba'
  *   reverseString('12345') => '54321'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  let reverseStr = '';
+  for (let i = 0; i < str.length; i += 1) {
+    reverseStr += str.at(str.length - i - 1);
+  }
+  return reverseStr;
 }
 
 /**

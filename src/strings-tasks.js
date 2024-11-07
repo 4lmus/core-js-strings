@@ -20,6 +20,9 @@
  *   getStringLength(undefined) => 0
  */
 function getStringLength(value) {
+  if (typeof value !== 'string') {
+    return 0;
+  }
   return value.length;
 }
 
@@ -36,9 +39,15 @@ function getStringLength(value) {
  *   isString({}) => false
  *   isString('test') => true
  *   isString(new String('test')) => true
+   if (typeof value === 'object') {
+    if (new.target) {
+      return true;
+    }
+  }
+console.log(isString({});
  */
 function isString(value) {
-  if (typeof value === 'string') {
+  if (typeof value === 'string' || value instanceof String) {
     return true;
   }
   return false;
@@ -57,7 +66,7 @@ function isString(value) {
  *   concatenateStrings('', 'bb') => 'bb'
  */
 function concatenateStrings(value1, value2) {
-  return value1 + value2;
+  return value1.concat('', value2);
 }
 
 /**

@@ -299,8 +299,27 @@ function reverseString(str) {
  *   orderAlphabetically('textbook') => 'bekoottx'
  *   orderAlphabetically('abc123xyz') => '123abcxyz'
  */
-function orderAlphabetically(/* str */) {
-  throw new Error('Not implemented');
+function orderAlphabetically(str) {
+  let oldStr = str;
+  let newStr = '';
+  for (let j = 0; j < str.length; j += 1) {
+    let letter = oldStr.at(0);
+    let index = 0;
+    for (let i = 0; i < oldStr.length; i += 1) {
+      if (i + 1 === oldStr.length) {
+        const firstPart = oldStr.slice(0, oldStr.indexOf(letter));
+        const secondPart = oldStr.slice(oldStr.indexOf(letter) + 1);
+        oldStr = firstPart + secondPart;
+        break;
+      }
+      if (oldStr.codePointAt(index) > oldStr.codePointAt(i + 1)) {
+        letter = oldStr.at(i + 1);
+        index = i + 1;
+      }
+    }
+    newStr += letter;
+  }
+  return newStr;
 }
 
 /**

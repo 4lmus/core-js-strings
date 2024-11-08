@@ -334,8 +334,11 @@ function orderAlphabetically(str) {
  *   containsSubstring('JavaScript is Fun', 'Python') => false
  *   containsSubstring('12345', '34') => true
  */
-function containsSubstring(/* str, substring */) {
-  throw new Error('Not implemented');
+function containsSubstring(str, substring) {
+  if (str.includes(substring)) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -352,8 +355,18 @@ function containsSubstring(/* str, substring */) {
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels(/* str */) {
-  throw new Error('Not implemented');
+function countVowels(str) {
+  const vowels = ['a', 'e', 'i', 'o', 'u', 'y'];
+  const newStr = str.toLowerCase();
+  let sumOfVowels = 0;
+  for (let i = 0; i < newStr.length; i += 1) {
+    for (let j = 0; j <= 5; j += 1) {
+      if (newStr[i] === vowels[j]) {
+        sumOfVowels += 1;
+      }
+    }
+  }
+  return sumOfVowels;
 }
 
 /**
@@ -369,8 +382,20 @@ function countVowels(/* str */) {
  *   isPalindrome('apple') => false
  *   isPalindrome('No lemon, no melon') => true
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  const lowerNewStr = str.toLowerCase();
+  let newStr = lowerNewStr.replaceAll(' ', '');
+  newStr = newStr.replaceAll(',', '');
+  newStr = newStr.replaceAll('!', '');
+  newStr = newStr.replaceAll('?', '');
+  let reverseStr = '';
+  for (let i = 0; i < newStr.length; i += 1) {
+    reverseStr += newStr.at(newStr.length - i - 1);
+  }
+  if (reverseStr === newStr) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -385,8 +410,42 @@ function isPalindrome(/* str */) {
  *   findLongestWord('A long and winding road') => 'winding'
  *   findLongestWord('No words here') => 'words'
  */
-function findLongestWord(/* sentence */) {
-  throw new Error('Not implemented');
+function findLongestWord(sentence) {
+  let word = '';
+  let longestWord = '';
+  let letterCounter1 = 0;
+  for (let i = 0; i < sentence.length; i += 1) {
+    if (sentence[i] === ' ') {
+      break;
+    }
+    word += sentence[i];
+    letterCounter1 += 1;
+  }
+  let letterCounter2 = 0;
+  longestWord = word;
+  word = '';
+  for (let i = longestWord.length + 1; i < sentence.length; i += 1) {
+    if (sentence[i] === ' ') {
+      if (letterCounter1 === letterCounter2) {
+        letterCounter1 = letterCounter2;
+        letterCounter2 = 0;
+        word = '';
+      }
+      if (letterCounter1 < letterCounter2) {
+        letterCounter1 = letterCounter2;
+        letterCounter2 = 0;
+        longestWord = word;
+        word = '';
+      } else {
+        letterCounter2 = 0;
+        word = '';
+      }
+    } else {
+      word += sentence[i];
+      letterCounter2 += 1;
+    }
+  }
+  return longestWord;
 }
 
 /**
@@ -399,8 +458,27 @@ function findLongestWord(/* sentence */) {
  *   reverseWords('Hello World') => 'olleH dlroW'
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
-function reverseWords(/* str */) {
-  throw new Error('Not implemented');
+function reverseWords(str) {
+  let sum = '';
+  let word = '';
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === ' ') {
+      let reverseStr = '';
+      for (let j = 0; j < word.length; j += 1) {
+        reverseStr += word.at(word.length - j - 1);
+      }
+      sum += reverseStr;
+      sum = sum.concat('', ' ');
+      word = '';
+    } else {
+      word += str[i];
+    }
+  }
+  let reverseStr = '';
+  for (let j = 0; j < word.length; j += 1) {
+    reverseStr += word.at(word.length - j - 1);
+  }
+  return sum.concat('', reverseStr);
 }
 
 /**
@@ -414,8 +492,22 @@ function reverseWords(/* str */) {
  *   invertCase('JavaScript is Fun') => 'jAVAsCRIPT IS fUN'
  *   invertCase('12345') => '12345'
  */
-function invertCase(/* str */) {
-  throw new Error('Not implemented');
+function invertCase(str) {
+  let sum = '';
+  for (let i = 0; i < str.length; i += 1) {
+    const lower = str[i].toLowerCase();
+    const upper = str[i].toUpperCase();
+    if (lower === upper) {
+      sum += lower;
+    }
+    if (str.charCodeAt(i) < lower.charCodeAt(0)) {
+      sum += lower;
+    }
+    if (str.charCodeAt(i) > upper.charCodeAt(0)) {
+      sum += upper;
+    }
+  }
+  return sum;
 }
 
 /**
